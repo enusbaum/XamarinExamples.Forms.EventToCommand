@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:b="clr-namespace:XamarinExamples.Forms.EventToCommand.Behaviors;assembly=XamarinExamples.Forms.EventToCommand" 
+    xmlns:c="clr-namespace:XamarinExamples.Forms.EventToCommand.Converters;assembly=XamarinExamples.Forms.EventToCommand" 
+    xmlns:local="clr-namespace:XamarinExamples.Forms.EventToCommand" 
+    x:Class="XamarinExamples.Forms.EventToCommand.XamarinExamples_Forms_EventToCommandPage">
+    
+    <!-- Set the Converter for the Event we're binding to a Command -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <c:ItemTappedEventArgsConverter x:Key="SelectedItemConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <!-- Page Content -->
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" IsEnabled="false" Placeholder="Tap an Item to see it here" Text="{Binding SelectedValue, Mode=OneWay}" />
+            <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="Black" />
+            <ListView ItemsSource="{Binding ListValues}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <!-- This actually keeps the list from rendering blank cells past the last item-->
+                <ListView.Footer>
+                    <StackLayout Orientation="Horizontal" />
+                </ListView.Footer>
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}" Converter="{StaticResource SelectedItemConverter}" />
+                </ListView.Behaviors>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
