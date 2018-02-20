@@ -1,4 +1,4 @@
-# XamarinExamples.Forms.SkiaSharpPanning
+# XamarinExamples.Forms.EventToCommand
 
 This repository holds an a working example of the Xamarin Reusable EventToCommand custom Behavior which lets you bind Commands to Events for Xamarin.Form elements that do not properly support the MVVM Command Pattern.
 
